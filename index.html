@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KORED DESIGNS – PHY 101 QUESTIONS DRILL</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>KORED DESIGNS</h1>
+    <h2>PHY 101 QUESTIONS DRILL</h2>
+    <div id="quiz-container">
+      <!-- Quiz questions will render here -->
+    </div>
+    <div id="score-container" style="display:none;">
+      <h3>Your score:</h3>
+      <p id="score"></p>
+      <button onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+  </div>
+  <script src="quiz.js"></script>
+  <script>
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function renderQuestion() {
+      const quizContainer = document.getElementById('quiz-container');
+      const question = quizData[currentQuestionIndex];
+
+      let html = `<h3>Q${currentQuestionIndex + 1}: ${question.question}</h3>`;
+      question.options.forEach((opt, i) => {
+        html += `<button onclick="answerQuestion(${i})">${opt}</button>`;
+      });
+      quizContainer.innerHTML = html;
+    }
+
+    function answerQuestion(selectedIndex) {
+      const question = quizData[currentQuestionIndex];
+      if (selectedIndex === question.answer) {
+        score++;
+      }
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizData.length) {
+        renderQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      document.getElementById('quiz-container').style.display = 'none';
+      const scoreContainer = document.getElementById('score-container');
+      scoreContainer.style.display = 'block';
+      document.getElementById('score').textContent = `${score} / ${quizData.length}`;
+    }
+
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      document.getElementById('score-container').style.display = 'none';
+      document.getElementById('quiz-container').style.display = 'block';
+      renderQuestion();
+    }
+
+    // Initialize the quiz on page load
+    window.onload = () => {
+      renderQuestion();
+    };
+  </script>
+</body>
+</html>
