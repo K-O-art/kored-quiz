@@ -1,0 +1,30 @@
+body {
+  background-color: #121212;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 30px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+button {
+  background-color: #6200EE;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px 5px;
+  width: 80%;
+  max-width: 300px;
+}
+
+button:hover {
+  background-color: #3700B3;
+}
